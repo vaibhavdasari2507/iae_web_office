@@ -16,7 +16,7 @@ export const addProject = (projectData) => async (dispatch) => {
         progress,
     } = projectData;
 
-    const res = await fetch(`http://localhost:8000/addproject/:${_id}`, {
+    const res = await fetch(`https://backend-9npc.onrender.com/addproject/:${_id}`, {
         method: "POST",
         body: JSON.stringify({
             projectName,
@@ -50,8 +50,8 @@ export const addProject = (projectData) => async (dispatch) => {
 export const getProject = (data)=> async dispatch=>{
     dispatch(projectActions.getProjectRequest());
     const id=data;
-    console.log(`http://localhost:8000/getproject/:${id}`);
-    const res = await fetch(`http://localhost:8000/getproject/:${id}`)
+    console.log(`https://backend-9npc.onrender.com/getproject/:${id}`);
+    const res = await fetch(`https://backend-9npc.onrender.com/getproject/:${id}`)
     const out = await res.json();
     console.log(out.data);
     if(out.message==="success"){
@@ -67,7 +67,7 @@ export const getProject = (data)=> async dispatch=>{
 export const deleteProject = data => async dispatch=>{
     dispatch(projectActions.deleteProjectRequest());
     const id = data;
-    const res = await fetch(`http://localhost:8000/deleteproject/:${id}`)
+    const res = await fetch(`https://backend-9npc.onrender.com/deleteproject/:${id}`)
     const out = await res.json();
     // console.log(out.data);
     if(out.message==="successfully deleted a project"){

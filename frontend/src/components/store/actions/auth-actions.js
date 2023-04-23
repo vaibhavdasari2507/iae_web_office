@@ -3,18 +3,8 @@ import Axios from "axios";
 
 export const register = (userData) => async (dispatch) => {
     dispatch(authActions.registerUserreq());
-    // const res = await fetch("http://localhost:8000/signUp", {
-    //     method: "POST",
-    //     body: JSON.stringify(userData),
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    // });
-    const res = await Axios.post("http://localhost:8000/signUp", userData);
-    // console.log(...userData);
+    const res = await Axios.post("https://backend-9npc.onrender.com/signUp", userData);
     const out = await res.data;
-    // console.log(out);
-    
     if (out.message === "signed up successfully") {
         dispatch(authActions.registerUsersuccess(out.data.user));
     } else {
@@ -24,7 +14,7 @@ export const register = (userData) => async (dispatch) => {
 
 export const login = (userData) => async (dispatch) => {
     dispatch(authActions.loginRequest());
-    const res = await fetch("http://localhost:8000/signIn", {
+    const res = await fetch("https://backend-9npc.onrender.com/signIn", {
         method: "POST",
         body: JSON.stringify(userData),
         headers: {
@@ -33,19 +23,14 @@ export const login = (userData) => async (dispatch) => {
     });
 
     const out = await res.json();
-    // console.log(out);
-    // console.log(out.data.userLogin.tokens[out.data.userLogin.tokens.length - 1].token);
     localStorage.setItem("jwttoken", JSON.stringify(out.data.userLogin.tokens[out.data.userLogin.tokens.length - 1]));
-
     if (out.message === "logged in successfully") dispatch(authActions.loginRequestSuccess(out.data.userLogin));
     else dispatch(authActions.loginRequestFail(out.message));
 };
 
 export const loadUser = () => async (dispatch) => {
     dispatch(authActions.loadUserRequest());
-    // console.log("in actions");
-    // console.log(JSON.parse(localStorage.getItem("jwttoken")));
-    const res = await fetch("http://localhost:8000/getbytoken", {
+    const res = await fetch("https://backend-9npc.onrender.com/getbytoken", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -3,9 +3,8 @@ import Admintemplate from "../UI/Admintemplate";
 import "../../public/assests/dashboard.css";
 // import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useSelector } from "react-redux";
-import { usersjson } from "../../public/users.json";
 import { useEffect, useState } from "react";
-import { Col, Row, Modal, Form, Spinner } from "react-bootstrap";
+import { Col, Row} from "react-bootstrap";
 import Axios from "axios";
 import DataTable from "react-data-table-component";
 import customStyles from "../../public/assests/Datatable";
@@ -14,15 +13,9 @@ export default function AdminControl(props) {
   const { user } = useSelector((state) => state.auth);
   console.log("Admin user : ", user);
   const [usersList, setUsersList] = useState([])
-  const [show, setShow] = useState(false);
-  const Handleclose = () => {
-    setShow(false);
-  };
-  const Handleshow = () => {
-    setShow(true);
-  };
+
   const getAllUsers = async () => {
-    const res = await Axios.get("http://localhost:8000/getallusers");
+    const res = await Axios.get("https://backend-9npc.onrender.com/getallusers");
     const out = await res.data;
     console.log(out);
     
@@ -102,7 +95,7 @@ export default function AdminControl(props) {
                                 className=''
                                 data-bs-toggle='modal'
                                 data-bs-target='#edit_user'
-                                onClick={Handleshow} >
+                                >
                                 {" "}
                                 Edit User{" "}
                               </a>
@@ -111,7 +104,7 @@ export default function AdminControl(props) {
                                 className='ms-5 '
                                 data-bs-toggle='modal'
                                 data-bs-target='#delete_user'
-                                onClick={Handleshow} >
+                                >
                                 {" "}
                                 Delete User{" "}
                               </a>

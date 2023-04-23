@@ -452,3 +452,4 @@
 ::1 - - [23/Apr/2023:07:02:46 +0000] "GET /getallusers HTTP/1.1" 201 8067789 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::1 - - [23/Apr/2023:07:02:46 +0000] "GET /getallusers HTTP/1.1" 201 8067789 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::1 - - [23/Apr/2023:07:02:46 +0000] "GET /getallusers HTTP/1.1" 201 8067789 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::1 - - [23/Apr/2023:07:36:57 +0000] "POST /signUp HTTP/1.1" 201 20587 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
