@@ -1,42 +1,68 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const projectSlice = createSlice({
-    name: "project",
+const employeeSlice = createSlice({
+    name: "employees",
     initialState: {
         loading: false,
         error:null,
-        project: [],
+        employees_array: [],
     },
     reducers:{
-        addProjectRequest(state,action){
+        addEmployeeRequest(state,action){
             state.loading = true;
             state.error = null;
         },
-        addProjectRequestSuccess(state,action){
+        addEmployeeRequestSuccess(state,action){
             state.loading = false;
             state.error = null;
-            state.project = action.payload;
+            state.employees_array = action.payload;
         },
-        addProjectRequestFail(state,action){
+        addEmployeeRequestFail(state,action){
             state.loading = false;
             state.error = action.payload;
         },
-        getProjectRequest(state,action){
+        getEmployeeRequest(state,action){
             state.loading = true;
             state.error = null;
-            state.project = null;
+            state.employees_array = null;
         },
-        getProjectRequestSuccess(state,action){
+        getEmployeeRequestSuccess(state,action){
             state.loading = false;
             state.error = null;
-            state.project = action.payload;
+            state.employees_array = action.payload;
         },
-        getProjectRequestFail(state,action){
+        getEmployeeRequestFail(state,action){
+            state.loading = false;
+            state.error = action.payload;
+        },
+        editEmployeeRequest(state,action){
+            state.loading = true;
+            state.error = null;
+        },
+        editEmployeeRequestSuccess(state,action){
+            state.loading = false;
+            state.error = null;
+            state.employees_array = action.payload;
+        },
+        editEmployeeRequestFail(state,action){
+            state.loading = false;
+            state.error = action.payload;
+        },
+        deleteEmployeeRequest(state,action){
+            state.loading = true;
+            state.error = null;
+        },
+        deleteEmployeeRequestSuccess(state,action){
+            state.loading = false;
+            state.error = null;
+            state.employees_array = action.payload;
+        },
+        deleteEmployeeRequestFail(state,action){
             state.loading = false;
             state.error = action.payload;
         }
     }
 })
 
-export const projectActions = projectSlice.actions;
-export default projectSlice;
+export const employeeActions = employeeSlice.actions;
+export default employeeSlice;
