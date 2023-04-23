@@ -1,41 +1,36 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Dashboardtemplate from "../UI/Dashboardtemplate";
 import "../../public/assests/clients.css";
+import ClientList from "../cards_container/ClientList";
 import Addclient from "../popup-models/Addclient";
 import Editclient from "../popup-models/Editclient";
 import Deleteclient from "../popup-models/Deleteclient";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getClient } from "../store/actions/client-actions";
 
 export default function Clients() {
-    
-    const [clientsDetails, setclientsDetails] = useState( [
-        {
-            _id: "c101",
-            fname: "Vaibhav",
-            lname: "Dasari",
-            uname: "Rao",
-            email: "vaibhav@gmail.com",
-            designation: "Web Developer",
-            phone: "123456789",
-            company: "InfoTech"
-        },
-        {
-            _id: "c102",
-            fname: "Sai",
-            lname: "kiran",
-            uname: "R",
-            email: "saikiran@gmail.com",
-            designation: "Android Developer",
-            phone: "123456789",
-            company: "Dell"
-        }
-    ]);
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
     const NULLURL = ""
     const [Client, setClient] = useState({})
+
+
+    // const onSubmitHandler = (c) => {
+    //     setclientsDetails( (pre) => [...pre, c]);
+    // }
+
+    const useremail = String(user.email)
+    const adminrole = useremail.includes("@manager")
+    console.log(adminrole);
+    useEffect(() => {
+        dispatch(getClient(user._id));
+    }, [dispatch, user._id]);
+    
+    const clients = user.clients;
     const ClientHandler = (event, eId) => {
-        clientsDetails.forEach(Client => {
+        clients.forEach(Client => {
             if (Client.id === eId) {
                 console.log(Client);
                 setClient(Client);
@@ -45,55 +40,11 @@ export default function Clients() {
         // console.log(event, editId);
     };
 
-    const onSubmitHandler = (c) => {
-        setclientsDetails( (pre) => [...pre, c]);
-    }
+    console.log('i am the array');
+    console.log(clients);
+    // let ClientsList = <p className="emptylist">No Clients Found</p>;
 
-    const { user } = useSelector((state) => state.auth);
-    const useremail = String(user.email)
-    const adminrole = useremail.includes("@manager")
-    console.log(adminrole);
 
-    let ClientsList = <p className="emptylist">No Clients Found</p>;
-
-    if (clientsDetails.length > 0) {
-        ClientsList = clientsDetails.map((e) => (
-            <div className="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
-                <div className="profile-widget">
-                    <div className="profile-img">
-                        <a href="/clientprofile" className="avatar">
-                            <img src={require("../../public/Images/review3.png")} alt="" />
-                        </a>
-                    </div>
-                    {
-                        adminrole && <div className="dropdown profile-action">
-                        <a
-                            href={NULLURL}
-                            className="action-icon dropdown-toggle"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            <i className="fa-solid fa-ellipsis-vertical"></i>
-                        </a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <a href={NULLURL} className="dropdown-item" data-bs-toggle="modal" data-bs-target="#edit_client" onClick={event => ClientHandler(event, e.id)} >
-                                <i className="fa fa-pencil m-r-5"></i> Edit
-                            </a>
-                            <a href={NULLURL} class="dropdown-item" data-bs-toggle="modal" data-bs-target="#delete_client" onClick={event => ClientHandler(event, e.id)}>
-                                <i class="fa fa-trash-o m-r-5"></i> Delete
-                            </a>
-                        </div>
-                    </div>
-                    }
-                    
-                    <h4 className="user-name m-t-10 mb-0 text-ellipsis">
-                        <a href="/clientprofile">{e.fname}</a>
-                    </h4>
-                    <div className="small text-muted">{e.designation}</div>
-                </div>
-            </div>
-        ));
-                }
 
     return (
         <Dashboardtemplate>
@@ -164,38 +115,13 @@ export default function Clients() {
                     </a>
                 </div>
             </div>
-            {/* <div class="row filter-row">
-                <div class="col-sm-12 col-md-12">
-                    <div class="form-group form-focus">
-                        <input type="text" class="form-control floating" placeholder="Client ID" id="filter" onkeyup="searchBlog()"/>
-                    </div>
-                </div>
-                {/* <!--<div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus">
-                        <input type="text" class="form-control floating" placeholder="Client Name">
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus">
-                        <select class="select-focus">
-                            <option>Select Company</option>
-                            <option>Global Technologies</option>
-                            <option>Delta Infotech</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="#" class="btn btn-success btn-block"> Search </a>
-                </div>--> 
-            </div> */}
-            
 
             {/* employees list */}
             <div className="row staff-grid-row">
-                {ClientsList}
+                { clients && <ClientList clientHandler={ClientHandler} />}
             </div>
 
-            <Addclient onSubmit = {onSubmitHandler} />
+            <Addclient />
             
             <Editclient client={Client} />
             <Deleteclient client={Client} />

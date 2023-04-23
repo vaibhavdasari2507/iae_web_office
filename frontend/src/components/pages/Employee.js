@@ -6,72 +6,37 @@ import EmployeeList from "../cards_container/EmployeeList";
 import Addemployee from "../popup-models/Addemployee";
 import Editemployee from "../popup-models/Editemployee";
 import Deleteemployee from "../popup-models/Deleteemployee";
-import { useSelector } from "react-redux";
-import axios from "axios"
+import { useSelector, useDispatch } from "react-redux";
+import { getEmployee } from "../store/actions/employee-actions";
+
 
 export default function Employee() {
-
-  const [Employees, setEmployees] = useState([ ])
-
-
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const NULLURL = ""
   const [Emp, setEmp] = useState({})
+  // const [eid,seteid] = useState({})
   const useremail = String(user.email)
   const adminrole = useremail.includes("@manager")
   console.log(adminrole);
 
-  const getUser = async () => {
-    await axios
-    .get('http://localhost:3000/employees')
-    .then(res => setEmployees(res.data));
-  };
   useEffect(() => {
-      getUser()
-  }, []);
+    dispatch(getEmployee(user._id));
+}, [dispatch, user._id]);
+
+const employees = user.employees;
 
   const EmployeeHandler = (event, eId) => {
-    Employees.forEach(employee => {
+    employees.forEach(employee => {
       if(employee.id === eId) {
         console.log("from handler: ", employee);
         setEmp(employee);
         return;
       }
     })
+    // seteid(eId)
   };
 
-  const AddEmployeeHandler = async (e) => {
-    const res = await axios.post('http://localhost:3000/employees', e);
-    if (res) {
-        alert("Data submitted successfully");
-
-      }
-      else {
-        alert("Something went wrong");
-      }
-      getUser()
-    }
-    
-    const EditEmployeeHandler = async (e) => {
-      console.log("In Edit async: ", e);
-      const res = await axios.put(`http://localhost:3000/employees/${e.id}`, e);
-      if (res) {
-        alert("Data submitted successfully");
-        
-      }
-      else {
-        alert("Something went wrong");
-      }
-      getUser()
-  }
-
-  const DeleteHandler = async(eid) => {
-    await axios
-      .delete('http://localhost:3000/employees/' + eid)
-      .then(res => alert("deleted success"));
-      getUser()
-  }
-  
   return (
     <Dashboardtemplate>
       {/* <!-- Page Header --> */}
@@ -143,12 +108,12 @@ export default function Employee() {
 
       {/* employees list */}
       <div className="row staff-grid-row" >
-        { Employees && <EmployeeList employees={Employees} employeeHandler={EmployeeHandler} />}
+        { employees && <EmployeeList employeeHandler={EmployeeHandler} />}
       </div>
 
-      <Addemployee submitHandler={AddEmployeeHandler}/>
-      <Editemployee emp = {Emp} submitHandler={EditEmployeeHandler} />
-      <Deleteemployee emp = {Emp} submitHandler={DeleteHandler} />
+      <Addemployee/>
+      <Editemployee emp = {Emp} />
+      <Deleteemployee emp = {Emp}/>
 
     </Dashboardtemplate>
   );

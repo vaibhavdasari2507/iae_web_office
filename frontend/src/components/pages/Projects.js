@@ -1,27 +1,35 @@
 import React from "react";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Dashboardtemplate from "../UI/Dashboardtemplate";
 import ProjectList from "../cards_container/ProjectList";
 import "../../public/assests/projects.css";
 import Addproject from "../popup-models/Addproject";
 import Editproject from "../popup-models/Editproject";
 import DeleteProject from "../popup-models/DeleteProject";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { getProject } from "../store/actions/project-actions";
 // import { set } from "immer/dist/internal";
 
 export default function Projects(props) {
+    const dispatch = useDispatch();
+
     const { user } = useSelector((state) => state.auth);
+    useEffect(() => {
+        dispatch(getProject(user._id));
+    }, [dispatch, user._id]);
+    
+    const projects = user.projects;
     const NULLURL = "";
     const [Prj, setPrj] = useState({});
     const [id,setId] = useState({})
     const idHandler = (event, pId) => {
-        // Projects.forEach((project) => {
-        //     if (project._id === pId) {
-        //         console.log(project);
-        //         setPrj(project);
-        //         return;
-        //     }
-        // });
+        projects.forEach((project) => {
+            if (project._id === pId) {
+                console.log(project);
+                setPrj(project);
+                return;
+            }
+        });
         setId(pId);
     };
 
@@ -102,7 +110,7 @@ export default function Projects(props) {
             {user && <ProjectList idHandler = {idHandler}/>}
 
             <Addproject />
-            <Editproject />
+            <Editproject prj={Prj} id={id}/>
             <DeleteProject id={id}/>
         </Dashboardtemplate>
     );
