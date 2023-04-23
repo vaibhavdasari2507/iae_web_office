@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 exports.dbconnection = () => {
     mongoose
-        .connect("mongodb://localhost:27017/React", {
+        .connect("mongodb+srv://vd2507:vaibhav@cluster0.nmxul8d.mongodb.net/?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
