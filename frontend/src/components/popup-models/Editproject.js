@@ -1,44 +1,68 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {  } from "../store/actions/project-actions";
+import { useDispatch,useSelector } from "react-redux";
+import { editProject } from "../store/actions/project-actions";
 
 export default function Editproject(props) {
-  // const prj = props.prj;
+  const proj = props.prj
+  const id = props.id
+  console.log("proj = ", proj);
   const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
+    console.log(user);
+    const [project, setProject] = useState({
+      // _id:'',
+      projectName:'',
+      clientName:'',
+      startDate:'',
+      endDate:'',
+      budget:'',
+      priority:'',
+      projectLeader:'',
+      team:'',
+      pdescription:'',
+      progress:'',
+    });
 
-  const [project, setProject] = useState({
-    // _id: "p102",
-    projectName: "",
-    clientName: "",
-    startDate: "",
-    endDate: "",
-    budget: "",
-    priority: "",
-    projectLeader: "",
-    team: [],
-    pdescription: "",
-    progress: "Pending",
-  });
+    const onChange = (e) => {
+        setProject({ ...project, [e.target.name]: e.target.value });
+        console.log(project);
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const p = project;
-    // dispatch(addProject(p));
-    window.location.reload();
-    // props.onSubmitHandler(project);
-    // console.log("from submit: ", project);
-  };
-
-  const onChange = (e) => {
-    if (e.target.name === "team") {
-      const tasks = e.target.value.split(",");
-      setProject({ ...project, [e.target.name]: tasks });
-    } else {
-      setProject({ ...project, [e.target.name]: e.target.value });
-    }
-    console.log(project);
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const ep = project;
+        console.log('in handle submit');
+        console.log(ep);
+        if (
+            // ep.id === "" ||
+            ep.projectName === "" ||
+            ep.clientName === "" ||
+            ep.startDate === "" ||
+            ep.endDate === "" ||
+            ep.budget === "" ||
+            ep.priority === "" ||
+            ep.projectLeader === "" ||
+            ep.team === "" ||
+            ep.pdescription === "" ||
+            ep.progress === "" 
+        ) {
+            if(ep.projectName === "" )ep.projectName=proj.projectName;
+            if(ep.clientName === "" )ep.clientName=proj.clientName;
+            if(ep.startDate === "" )ep.startDate=proj.startDate;
+            if(ep.endDate === "" )ep.endDate=proj.endDate;
+            if(ep.budget === "" )ep.budget=proj.budget;
+            if(ep.priority === "" )ep.priority=proj.priority;
+            if(ep.projectLeader === "")ep.projectLeader=proj.projectLeader;
+            if(ep.team === "" )ep.team=proj.team;
+            if(ep.pdescription === "" )ep.pdescription=proj.pdescription;
+            if(ep.progress === "" )ep.progress=proj.progress;
+        }
+        ep.id = id;
+        console.log(ep);
+        dispatch(editProject(ep));
+        window.location.reload();
+    };
   return (
     <div
       id="edit_project"
@@ -61,7 +85,7 @@ export default function Editproject(props) {
             ></button>
           </div>
           <div className="modal-body">
-            <form method="post" action="" id="editproject" onSubmit={null}>
+            <form method="post" action="" id="editproject" onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-sm-6">
                   <div className="form-group">
@@ -71,7 +95,8 @@ export default function Editproject(props) {
                       className="form-control minput"
                       placeholder="Project name"
                       type="text"
-                      // defaultValue={prj.projectName}
+                      defaultValue={proj.projectName}
+                      onChange={onChange}
                     />
                   </div>
                 </div>
@@ -81,7 +106,8 @@ export default function Editproject(props) {
                     <select
                       name="clientName"
                       className="select modal-select minput"
-                      // defaultValue={prj.clientName}
+                      defaultValue={proj.clientName}
+                      onChange={onChange}
                     >
                       <option value="">-- Select --</option>
                       <option value="Global Technologies">
@@ -101,7 +127,8 @@ export default function Editproject(props) {
                         name="startDate"
                         className="form-control datetimepicker minput"
                         type="text"
-                        // defaultValue={prj.startDate}
+                        defaultValue={proj.startDate}
+                        onChange={onChange}
                       />
                     </div>
                   </div>
@@ -114,7 +141,8 @@ export default function Editproject(props) {
                         name="endDate"
                         className="form-control datetimepicker minput"
                         type="text"
-                        // defaultValue={prj.endDate}
+                        defaultValue={proj.endDate}
+                        onChange={onChange}
                       />
                     </div>
                   </div>
@@ -129,7 +157,8 @@ export default function Editproject(props) {
                       placeholder="₹500"
                       className="form-control minput"
                       type="text"
-                      // defaultValue={prj.budget}
+                      defaultValue={proj.budget}
+                      onChange={onChange}
                     />
                   </div>
                 </div>
@@ -139,7 +168,8 @@ export default function Editproject(props) {
                     <select
                       name="priority"
                       className="select modal-select minput"
-                      // defaultValue={prj.priority}
+                      defaultValue={proj.priority}
+                      onChange={onChange}
                     >
                       <option value="Top">High</option>
                       <option value="Medium">Medium</option>
@@ -156,7 +186,8 @@ export default function Editproject(props) {
                       name="projectLeader"
                       className="form-control minput"
                       type="text"
-                      // defaultValue={prj.projectLeader}
+                      defaultValue={proj.projectLeader}
+                      onChange={onChange}
                     />
                   </div>
                 </div>
@@ -168,7 +199,8 @@ export default function Editproject(props) {
                       id="teaminput"
                       className="form-control minput"
                       type="text"
-                      // defaultValue={prj.team}
+                      defaultValue={proj.team}
+                      onChange={onChange}
                     />
                   </div>
                 </div>
@@ -180,12 +212,13 @@ export default function Editproject(props) {
                   rows="4"
                   className="form-control summernote minput"
                   placeholder="Enter your message here"
-                  // defaultValue={prj.pdescription}
+                  defaultValue={proj.pdescription}
+                  onChange={onChange}
                 ></textarea>
               </div>
               <div className="form-group">
                 <label>Upload Files</label>
-                <input className="form-control minput" type="file" />
+                <input className="form-control minput" type="file" onChange={onChange}/>
               </div>
               <div className="submit-section">
                 <button type="submit" className="btn btn-primary submit-btn">

@@ -1,6 +1,6 @@
 import React from "react";
 import { deleteProject } from "../store/actions/project-actions";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function DeleteProject(props) {
     const dispatch = useDispatch();

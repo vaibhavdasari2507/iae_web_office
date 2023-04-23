@@ -1,22 +1,63 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { editEmployee } from "../store/actions/employee-actions";
 export default function Editemployee(props) {
   const curremp = props.emp
-  console.log("in edit: ", curremp);
+  const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
+    console.log(user);
+    const [employee, setEmployee] = useState({
+        uid:user._id,
+        id: "",
+        fname: "",
+        lname: "",
+        uname: "",
+        email: "",
+        jdate: "",
+        phone: "",
+        company: "",
+        department: "",
+        designation: ""
+    });
 
-  const [employee, setEmployee] = useState({});
+    const onChange = (e) => {
+        setEmployee({ ...employee, [e.target.name]: e.target.value });
+        console.log(employee);
+    };
 
-  console.log("in edit E: ", employee);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const ep = employee;
+        console.log('in handle submit');
+        console.log(ep);
+        if (
+            ep.id === "" ||
+            ep.fname === "" ||
+            ep.lname === "" ||
+            ep.uname === "" ||
+            ep.email === "" ||
+            ep.jdate === "" ||
+            ep.phone === "" ||
+            ep.company === "" ||
+            ep.department === "" ||
+            ep.designation === ""
+        ) {
+            if (ep.id === "") ep.id = curremp.id;
+            if (ep.fname === "") ep.fname = curremp.fname;
+            if (ep.lname === "") ep.lname = curremp.lname;
+            if (ep.uname === "") ep.uname= curremp.uname;
+            if (ep.email === "") ep.email = curremp.email;
+            if (ep.jdate === "") ep.jdate= curremp.jdate;
+            if (ep.phone === "")ep.phone = curremp.phone;
+            if (ep.company === "") ep.company = curremp.company;
+            if (ep.department === "")ep.department = curremp.department;
+            if (ep.designation === "") ep.designation = curremp.designation;
+        }
 
-  const onChange = (e) => {
-      setEmployee({ ...curremp, [e.target.name]: e.target.value });
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("from edit submit: ", employee);
-    props.submitHandler(employee)
-  }
+        dispatch(editEmployee(ep));
+        window.location.reload();
+    };
   return (
     <div id="edit_employee" className="modal custom-modal fade" role="dialog" aria-modal="true" >
       <div className="modal-dialog modal-dialog-centered modal-lg">
@@ -33,7 +74,7 @@ export default function Editemployee(props) {
             </button>
           </div>
           <div className="modal-body">
-            <form className="editform" onSubmit={submitHandler} >
+            <form className="editform" onSubmit={handleSubmit} >
               <div className="row">
                     <div className="col-sm-6">
                         <div className="form-group">
@@ -81,7 +122,7 @@ export default function Editemployee(props) {
                         <input
                         className="form-control"
                         name="email"
-                        defaultValue={curremp.emailid}
+                        defaultValue={curremp.email}
                         type="email"
                         onChange={onChange}
                         />
