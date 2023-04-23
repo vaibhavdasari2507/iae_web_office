@@ -1,19 +1,31 @@
 import React from "react";
 import "../../public/assests/employee.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getEmployee } from "../store/actions/employee-actions";
+import { useEffect } from "react";
 
 export default function EmployeeList(props) {
-    const NULLURL = "";
+    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
+    const NULLURL = "";
     const useremail = String(user.email);
     const adminrole = useremail.includes("@manager");
     console.log(adminrole);
+    useEffect(() => {
+        dispatch(getEmployee(user._id));
+    }, [dispatch, user._id]);
 
-    // Put this code in useEffect
+
+    
+    console.log(user);
+    const employees = user.employees;
+
+    console.log("employees : ", employees);
+
     let EmployeeList = <p className='emptylist'>No Employees Found</p>;
 
-    if (props.employees.length > 0) {
-        EmployeeList = props.employees.map((e) => (
+    if (employees.length > 0) {
+        EmployeeList = employees.map((e) => (
             <div className='col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3' key={e.id}>
                 <div className='profile-widget'>
                     <div className='profile-img'>
@@ -50,12 +62,6 @@ export default function EmployeeList(props) {
                                 >
                                     <i className='fa fa-trash-o m-r-5'></i> Delete
                                 </a>
-                                {/* <a className="dropdown-item" href={`/edit/:${e.id}`}  >
-                            <i className="fa fa-pencil m-r-5"></i> Edit
-                        </a> */}
-                                {/* <a className="dropdown-item" href={`/deleteemployee/:${e.id}`}>
-                            <i className="fa fa-trash-o m-r-5"></i> Delete
-                        </a> */}
                             </div>
                         </div>
                     )}

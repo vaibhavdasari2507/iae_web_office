@@ -1,12 +1,12 @@
 import React from "react";
 import "../../public/assests/projects.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getProject,deleteProject } from "../store/actions/project-actions";
+import { getProject} from "../store/actions/project-actions";
 import { useEffect } from "react";
 
 
 export default function ProjectList(props) {
-    let i = 1;
+    // let i = 1;
     const dispatch = useDispatch();
 
     const NULLURL = "";
@@ -64,6 +64,7 @@ export default function ProjectList(props) {
                                     href={NULLURL}
                                     data-bs-toggle='modal'
                                     data-bs-target='#edit_project'
+                                    onClick={(event) => props.idHandler(event, project._id)}
                                 >
                                     <i className='fa fa-pencil m-r-5'></i> Edit
                                 </a>
