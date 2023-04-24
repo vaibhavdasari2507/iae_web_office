@@ -2,6 +2,7 @@ const User = require("../../models/userSchema");
 const Employee = require("../../models/employeeSchema");
 
 exports.addemployee = async (req, res) => {
+    // const id = "641fe5850a1f221cbd939135";
     const id = req.params.id.slice(1);
     try {
         let user = await User.findOne({ _id: id });

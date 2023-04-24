@@ -3,7 +3,7 @@ const Employee = require("../../models/employeeSchema");
 exports.editemployee = async (req, res) => {
     const id = req.params.id.slice(1);
     try {
-        const newemp = await Employee.findByIdAndUpdate({ _id: id }, req.body, { upsert: false });
+        const newemp = await Employee.findOneAndUpdate({ id: id }, req.body, { upsert: false });
         await newemp.save();
         res.status(201).json({
             message: "successfully edited emp",
