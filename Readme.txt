@@ -19,7 +19,8 @@ Group Members:
 5)	Sneha H S 
 	S20200010202
 
-
+GITHUB REPO LINK : https://github.com/vaibhavdasari2507/wbd_deploy.git
+DEPLOYED APP URL : https://frontend-jzqn.onrender.com/
 
 
 STEPS TO RUN THE PROJECT
