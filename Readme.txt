@@ -1,25 +1,18 @@
-						GROUP - 45
+						GROUP - 8
 
 Project Title: WebOffice - Employee Management and work Scheduler.
 
 Group Members:
+Vaibhav Dasari - S20200010217
+Polamarasetti Jagan Ram Jaswanth - S20200020295
+Junith Kumar Rapeta - S20200020297
+Yerramsetty Sudhasree - S20200010238
+P V Chandrasekhar - S20200010154
+Nookada Dinesh - S20200010151
+D. Abhishek - S20200010050
 
-1)  Sai kiran Ravirala
-    S20200010176
-	
-2)	Vaibhav Dasari
-	S20200010217
 
-3)	Surya Sri Nitya Narigiri
-	S20200010143
-
-4)	P. Manohar Sashank
-	S20200010163
-
-5)	Sneha H S 
-	S20200010202
-
-GITHUB REPO LINK : https://github.com/vaibhavdasari2507/wbd_deploy.git
+GITHUB REPO LINK : https://github.com/vaibhavdasari2507/iae_web_office.git
 DEPLOYED APP URL : https://frontend-jzqn.onrender.com/
 
 
