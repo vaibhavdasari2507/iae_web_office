@@ -35,23 +35,34 @@ export default function Header(props) {
     
     //     base64String = btoa(chunks.join(''));
     // }
-    let base64String;
+    // let base64String;
     
-    if (user.profile) {
-        const img = user.profile;
+    // if (user.profile) {
+    //     const img = user.profile;
         
-        // Create a Blob from the Uint8Array
-        const blob = new Blob([img.data.data], { type: 'application/octet-stream' });
+    //     // Create a Blob from the Uint8Array
+    //     const blob = new Blob([img.data.data], { type: 'application/octet-stream' });
     
-        // Use FileReader to read the Blob as a Data URL
-        const reader = new FileReader();
+    //     // Use FileReader to read the Blob as a Data URL
+    //     const reader = new FileReader();
     
-        reader.onload = function () {
-            base64String = reader.result.split(',')[1];
-        };
+    //     reader.onload = function () {
+    //         base64String = reader.result.split(',')[1];
+    //     };
     
-        reader.readAsDataURL(blob);
-    }
+    //     reader.readAsDataURL(blob);
+    // }
+    let base64String;
+
+if (user.profile) {
+    const img = user.profile;
+    
+    // Create a Blob from the Uint8Array
+    const blob = new Blob([img.data.data], { type: 'application/octet-stream' });
+
+    // Create a data URL directly from the Uint8Array
+    base64String = URL.createObjectURL(blob);
+}
     return (
         <React.Fragment>
             <div className='header'>
