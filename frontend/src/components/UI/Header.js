@@ -21,7 +21,7 @@ export default function Header(props) {
     //         String.fromCharCode(...new Uint8Array(img.data.data))
     //     );
     // }
-    // let base64String;
+    let base64String;
     
     if (user.profile) {
         const img = user.profile;
