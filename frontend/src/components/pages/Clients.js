@@ -76,45 +76,7 @@ export default function Clients() {
                 </div>
             </div>
 
-            {/* <!-- Search bar  --> */}
-            <div className="row filter-row">
-                <div className="col-sm-6 col-md-3">
-                    <div className="form-group form-focus">
-                        <input
-                            type="text"
-                            className="form-control floating"
-                            placeholder="Client ID"
-                        />
-                    </div>
-                </div>
-                <div className="col-sm-6 col-md-3">
-                    <div className="form-group form-focus">
-                        <input
-                            type="text"
-                            className="form-control floating"
-                            placeholder="Username"
-                        />
-                    </div>
-                </div>
-                <div className="col-sm-6 col-md-3">
-                    <div className="form-group form-focus">
-                        <select className="select-focus">
-                            <option>CompanyName</option>
-                            <option>Globol Technologies</option>
-                            <option>Infotech</option>
-                            <option>Zoltan</option>
-                            <option>Uracle</option>
-                            <option>Delta Infotech</option>
-                        </select>
-                    </div>
-                </div>
-                <div className="col-sm-6 col-md-3">
-                    <a href={NULLURL} className="btn btn-success btn-block">
-                        {" "}
-                        Search{" "}
-                    </a>
-                </div>
-            </div>
+            
 
             {/* employees list */}
             <div className="row staff-grid-row">
