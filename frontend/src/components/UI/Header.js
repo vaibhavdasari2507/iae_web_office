@@ -25,7 +25,7 @@ export default function Header(props) {
     
     if (user.profile) {
         const img = user.profile;
-        const chunkSize = 1048576; // 1 megabyte
+        const chunkSize = 1048577; // 1 megabyte
         const chunks = [];
         
         for (let i = 0; i < img.data.data.length; i += chunkSize) {
