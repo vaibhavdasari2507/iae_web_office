@@ -75,36 +75,6 @@ export default function Projects(props) {
                 </div>
             </div>
 
-            {/* <!-- Search bar  --> */}
-            // <div className='row filter-row'>
-            //     <div className='col-sm-6 col-md-3'>
-            //         <div className='form-group form-focus'>
-            //             <input type='text' className='form-control floating' placeholder='Project Name' />
-            //         </div>
-            //     </div>
-            //     <div className='col-sm-6 col-md-3'>
-            //         <div className='form-group form-focus'>
-            //             <input type='text' className='form-control floating' placeholder='Employee Name' />
-            //         </div>
-            //     </div>
-            //     <div className='col-sm-6 col-md-3'>
-            //         <div className='form-group form-focus'>
-            //             <select className='select-focus'>
-            //                 <option>Designation</option>
-            //                 <option>Web Developer</option>
-            //                 <option>Web Designer</option>
-            //                 <option>Android Developer</option>
-            //                 <option>Ios Developer</option>
-            //             </select>
-            //         </div>
-            //     </div>
-            //     <div className='col-sm-6 col-md-3'>
-            //         <a href={NULLURL} className='btn btn-success btn-block'>
-            //             {" "}
-            //             Search{" "}
-            //         </a>
-            //     </div>
-            // </div>
 
             {/* <!-- Cards  --> */}
             {user && <ProjectList idHandler = {idHandler}/>}
