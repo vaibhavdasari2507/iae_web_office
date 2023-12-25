@@ -21,19 +21,36 @@ export default function Header(props) {
     //         String.fromCharCode(...new Uint8Array(img.data.data))
     //     );
     // }
+    // let base64String;
+    
+    // if (user.profile) {
+    //     const img = user.profile;
+    //     const chunkSize = 1048576; // 1 megabyte
+    //     const chunks = [];
+        
+    //     for (let i = 0; i < img.data.data.length; i += chunkSize) {
+    //         const chunk = img.data.data.slice(i, i + chunkSize);
+    //         chunks.push(String.fromCharCode(...new Uint8Array(chunk)));
+    //     }
+    
+    //     base64String = btoa(chunks.join(''));
+    // }
     let base64String;
     
     if (user.profile) {
         const img = user.profile;
-        const chunkSize = 1048576; // 1 megabyte
-        const chunks = [];
         
-        for (let i = 0; i < img.data.data.length; i += chunkSize) {
-            const chunk = img.data.data.slice(i, i + chunkSize);
-            chunks.push(String.fromCharCode(...new Uint8Array(chunk)));
-        }
+        // Create a Blob from the Uint8Array
+        const blob = new Blob([img.data.data], { type: 'application/octet-stream' });
     
-        base64String = btoa(chunks.join(''));
+        // Use FileReader to read the Blob as a Data URL
+        const reader = new FileReader();
+    
+        reader.onload = function () {
+            base64String = reader.result.split(',')[1];
+        };
+    
+        reader.readAsDataURL(blob);
     }
     return (
         <React.Fragment>
