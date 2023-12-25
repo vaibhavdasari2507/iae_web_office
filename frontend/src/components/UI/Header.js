@@ -13,15 +13,28 @@ export default function Header(props) {
     const user = UserObj.user
     console.log("user in header: ", user);
 
+    // let base64String;
+    // if (user.profile) {
+    //     const img = user.profile;
+    //     // const base64String = Buffer.from(String.fromCharCode(...new Uint8Array(img.data.data)), 'base64').toString('base64');
+    //     base64String = btoa(
+    //         String.fromCharCode(...new Uint8Array(img.data.data))
+    //     );
+    // }
     let base64String;
+    
     if (user.profile) {
         const img = user.profile;
-        // const base64String = Buffer.from(String.fromCharCode(...new Uint8Array(img.data.data)), 'base64').toString('base64');
-        base64String = btoa(
-            String.fromCharCode(...new Uint8Array(img.data.data))
-        );
+        const chunkSize = 1048576; // 1 megabyte
+        const chunks = [];
+        
+        for (let i = 0; i < img.data.data.length; i += chunkSize) {
+            const chunk = img.data.data.slice(i, i + chunkSize);
+            chunks.push(String.fromCharCode(...new Uint8Array(chunk)));
+        }
+    
+        base64String = btoa(chunks.join(''));
     }
-
     return (
         <React.Fragment>
             <div className='header'>
