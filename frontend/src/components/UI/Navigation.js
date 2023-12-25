@@ -68,14 +68,7 @@ export default function Navigation(props) {
                         <span className="title">Clients profile</span>
                     </Link>
                 </li>
-                <li className={splitLocation[1] === "settings" ? "active-btn" : ""}>
-                    <Link to='/settings'>
-                        <span className="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span className="title">Settings</span>
-                    </Link>
-                </li>
+
             </ul>
         </div>
     </>
