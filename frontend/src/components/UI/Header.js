@@ -23,18 +23,18 @@ export default function Header(props) {
     // }
     // let base64String;
     
-    // if (user.profile) {
-    //     const img = user.profile;
-    //     const chunkSize = 1048576; // 1 megabyte
-    //     const chunks = [];
+    if (user.profile) {
+        const img = user.profile;
+        const chunkSize = 1048576; // 1 megabyte
+        const chunks = [];
         
-    //     for (let i = 0; i < img.data.data.length; i += chunkSize) {
-    //         const chunk = img.data.data.slice(i, i + chunkSize);
-    //         chunks.push(String.fromCharCode(...new Uint8Array(chunk)));
-    //     }
+        for (let i = 0; i < img.data.data.length; i += chunkSize) {
+            const chunk = img.data.data.slice(i, i + chunkSize);
+            chunks.push(String.fromCharCode(...new Uint8Array(chunk)));
+        }
     
-    //     base64String = btoa(chunks.join(''));
-    // }
+        base64String = btoa(chunks.join(''));
+    }
     // let base64String;
     
     // if (user.profile) {
@@ -52,17 +52,17 @@ export default function Header(props) {
     
     //     reader.readAsDataURL(blob);
     // }
-    let base64String;
+//     let base64String;
 
-if (user.profile) {
-    const img = user.profile;
+// if (user.profile) {
+//     const img = user.profile;
     
-    // Create a Blob from the Uint8Array
-    const blob = new Blob([img.data.data], { type: 'application/octet-stream' });
+//     // Create a Blob from the Uint8Array
+//     const blob = new Blob([img.data.data], { type: 'application/octet-stream' });
 
-    // Create a data URL directly from the Uint8Array
-    base64String = URL.createObjectURL(blob);
-}
+//     // Create a data URL directly from the Uint8Array
+//     base64String = URL.createObjectURL(blob);
+// }
     return (
         <React.Fragment>
             <div className='header'>
