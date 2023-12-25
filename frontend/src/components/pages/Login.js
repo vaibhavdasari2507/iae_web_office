@@ -258,7 +258,7 @@ export default function Login(props) {
                             <input
                                 type="file"
                                 id="file-input"
-                                accept=".png; .jpg"
+                                accept=".jpg, .jpeg, .png"
                                 onChange={(event) => {
                                     setFile(event.target.files[0]);
                                 }}
